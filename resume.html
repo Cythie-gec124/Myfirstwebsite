@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cythie - Resume</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Fontdiner+Swanky&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <style>
+            {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0f111a;
+                background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                                  linear-gradient(135deg, #688ef5 0%, #1a1c2e 100%);
+                background-size: 30px 30px, 100% 100%;
+                background-repeat: repeat, no-repeat;
+                background-attachment: fixed;
+                font-family: 'Inter', Arial, sans-serif;
+                color: #ffffff;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .header-banner {
+                background: linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.6) 100%),
+                            url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+                height: 90px;         
+                display: flex;         
+                align-items: center;
+                justify-content: center; 
+                color: #ffffff;
+                font-family: "Fontdiner Swanky", cursive; 
+                font-size: 2.8rem;
+                letter-spacing: 1px;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.3);
+                position: relative;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .site {
+                text-decoration: none;
+                color: #ffffff;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            .site:hover {
+                color: #e2e8f0;
+                transform: scale(1.02);
+            }
+
+            .menu-btn {
+                position: fixed;
+                top: 15px;
+                right: 25px;
+                font-size: 36px;
+                cursor: pointer;
+                z-index: 100;
+                color: #ffffff;
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(8px);
+                width: 55px;
+                height: 55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .menu-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: rotate(90deg);
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                right: 0;
+                background-color: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(15px);
+                overflow-x: hidden;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding-top: 80px;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.7);
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidenav a {
+                padding: 14px 20px 14px 40px;
+                text-decoration: none;
+                font-size: 22px;
+                font-weight: 500;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+
+            .sidenav a:hover {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.08);
+                padding-left: 48px;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 40px;
+                margin-left: 50px;
+                color: #94a3b8;
+                cursor: pointer;
+            }
+
+            .sidenav .closebtn:hover {
+                color: #ffffff;
+            }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(3px);
+                z-index: 999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .main-content {
+                max-width: 1400px;
+                margin: 0 auto;
+                width: 100%;
+                padding: 20px 25px;
+                flex: 1;
+            }
+
+            .page-title {
+                font-family: 'Inter', sans-serif;
+                margin-left: 10px;
+                margin-bottom: 25px;
+                font-size: 42px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                background: linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .page-title::after {
+                content: '';
+                flex: 1;
+                height: 2px;
+                background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            }
+
+            #container {
+                background-color: rgba(255, 255, 255, 0.02);
+                border-radius: 30px;
+                padding: 60px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+            }   
+
+            footer {
+                margin-top: 40px;
+                padding: 25px 20px;
+                text-align: center;
+                background: rgba(15, 23, 42, 0.8);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            footer p {
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                color: #94a3b8;
+            }
+
+            @media screen and (max-width: 1024px) {
+                #myDIV {
+                    height: auto;
+                    grid-template-areas: none;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-auto-rows: 280px;
+                }
+	
+	table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dots {
+  letter-spacing: 3px;
+  font-size: 12px;
+}
+
+hr {
+  border: none;              
+  height: 3px;               
+  background-color: #333;    
+  margin: 20px; 
+ margin-top: 50px;
+}
+
+.overlay-btn {
+                align-self: flex-start;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: #ffffff;
+                color: #0f172a;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 12px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .overlay-btn:hover {
+                background: #38bdf8;
+                color: #ffffff;
+                transform: translateX(4px);
+            }
+
+
+                    </style>
+    </head>
+    <body>
+        <header class="header-banner">
+            <a href="home.html" class="site">A Gentle Chronicle</a>
+            <span class="menu-btn" onclick="openNav()" aria-label="Open Navigation">☰</span>
+            
+            <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="services.html"><i class="fa-solid fa-list-check"></i> Services</a>
+                <a href="resume.html"><i class="fa-solid fa-file-lines"></i> Resume</a>
+                <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
+                <a href="testi.html"><i class="fa-solid fa-comment-dots"></i> Testimonials</a>
+                <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <h1 class="page-title">RESUME</h1>
+            
+
+
+            <div id="container">
+		
+		<table>
+			<tr>
+			<td><img src="images/pic.png" style="width: 200px;"></td>
+			<td> <h1 style="margin-left:50px;"> DEXIE ANNE CYTHERIA J. MONTEBON</h1> 
+		<h3 style="color:#cbcbcb; margin-left:50px;"> Fourth-Year Nursing Student </h3>
+		<h4 style="color: #cbcbcb; margin-left:50px;">Iligan City, Lanao Del Norte, Philippines ● 0945 XXX XX52 ● dexieannecytheria.montebon@g.msuiit.edu.ph</h4> </td>
+			</tr>
+		</table>
+	
+	<hr>
+
+	<table>
+		<tr>
+		<td> <h2> <strong>PROFILE</strong></h2> </td>
+		<td></td>
+		<td> <h2 style="margin-left:-350px;"> <strong> CORE SKILLS </strong></h2>				</td>
+		</tr>
+		
+		<tr>
+		<td> A detail-oriented and adaptable individual with a willingness to learn, grow, and take on new challenges. 
+
+			<p>Creative and versatile, with interests and skills in communication, organization, writing, and various creative</p>
+			<p> activities. Works well with others, values meaningful connections, and approaches tasks with patience, </p> 
+			<p>persistence, and a strong sense of responsibility. Always willing to learn from new experiences and </p>
+			<p>continuously improve both personally and professionally. </p>
+		<br>
+		</td>
+		
+		<td> 
+
+<div class="skill" style="margin-left:30px;">
+  <span>DETAIL-ORIENTED</span>
+  <span class="dots">●●●●○</span>
+</div>
+<p></p>
+
+<div class="skill" style="margin-left:30px;">
+  <span>PERSISTENT</span>
+  <span class="dots">●●●●○</span>
+</div>
+<p></p>
+
+<div class="skill" style="margin-left:30px;">
+  <span>VERSATILE</span>
+  <span class="dots">●●●●●</span>
+</div>
+<p></p>
+
+<div class="skill" style="margin-left:30px;">
+  <span>COLLABORATIVE</span>
+  <span class="dots">●●●●○</span>
+</div>
+<p></p>
+
+
+<div class="skill" style="margin-left:30px;">
+  <span>CONSCIENTIOUS</span>
+  <span class="dots">●●●●●</span>
+</div>
+<p></p>
+
+		</td>
+		</tr>
+
+<tr>
+<td> <h2 style="margin-top:-70px;"><strong>CLINICAL EXPERIENCE</strong></h2>
+	
+	<p style="margin-left:20px;"> <strong>Gregorio T. LLuch Memorial Hospital (2024-2027)</strong></p>
+		<p style="margin-left:40px;">OR Student Nurse</p>
+			<p style="margin-left:60px;"> ● Performed circulating and scrub nurse duties under direct supervision. </p>
+
+<p style="margin-left:60px;">● Maintained strict aseptic technique and monitored sterile fields throughout procedures. </p>
+
+<p style="margin-left:60px;"> ● Conducted surgical instrument and sponge counts prior to, during, and following surgeries. </p>
+
+<p style="margin-left:60px;"> ● Prepped surgical suites, positioning patients safely and applying sterile draping.</p>			
+		<p style="margin-left:40px;">OB/GYN Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Monitored maternal vital signs, uterine contractions, and fetal heart tones during labor. </p>
+
+<p style="margin-left:60px;"> ● Supported immediate newborn care, including suctioning, thermal regulation, APGAR scoring, and identification banding.</p>
+
+<p style="margin-left:60px;"> ● Assessed postpartum fundal height, lochia, and surgical site recovery. </p>
+
+<p style="margin-left:60px;"> ● Educated new mothers on infant care, umbilical cord hygiene, and breastfeeding techniques.</p>
+
+		<p style="margin-left:40px;">PACU Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Assessed patient airway patency, oxygenation, baseline consciousness, and vital signs upon arrival.</p>
+
+<p style="margin-left:60px;"> ● Evaluated post-operative recovery scores (e.g., Aldrete Score) to assess discharge readiness. </p>
+
+<p style="margin-left:60px;"> ● Managed acute post-surgical pain, nausea, and surgical site dressings/drains.</p>
+
+<p style="margin-left:60px;"> ● Reported post-anesthetic complications or rapid baseline changes immediately to the primary nurse. </p>
+
+		<p style="margin-left:40px;">Pediatric Sudent Nurse</p>
+<p style="margin-left:60px;"> ● Calculated and verified age/weight-adjusted drug dosages and IV fluid infusion rates. </p>
+
+<p style="margin-left:60px;"> ● Assessed growth and developmental milestones using pediatric assessment tools. </p>
+
+
+<p style="margin-left:60px;"> ● Performed pediatric vital sign monitoring and pain assessments (FLACC/Wong-Baker FACES scales).</p>
+
+<p style="margin-left:60px;"> ● Partnered with families to provide pediatric health education and developmental comfort care. </p>
+
+		<p style="margin-left:40px;">Ward Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Conducted head-to-toe physical assessments and recorded baseline clinical measurements. </p>
+
+<p style="margin-left:60px;"> ● Prioritized multi-patient care tasks, administering hygiene care, bed turnover, and wound dressings.</p>
+
+<p style="margin-left:60px;"> ● Formulated and executed individual nursing care plans aligned with physician orders.</p>
+
+<p style="margin-left:60px;"> ● Conducted SBAR (Situation-Background-Assessment-Recommendation) shift handovers to staff nurses.</p>
+		
+		<p style="margin-left:40px;">Medication Student Nurse</p>	
+
+<p style="margin-left:60px;"> ● Consistently applied the 10 Rights of Medication Administration before drug delivery.</p>
+
+<p style="margin-left:60px;"> ● Calculated complex intravenous flow rates, dosage unit conversions, and dilution volumes.</p>
+
+
+			
+	</td>
+
+
+<td>   <h2><strong>PERSONAL INFORMATION</strong></h2>
+	<p style="margin-left:20px;"><strong>Born & Raised:</strong></p>
+		<p style="margin-left:40px;">Iligan City, Lanao Del Norte, Philippines</p>
+	<p style="margin-left:20px;"><strong>Religion:</strong></p>
+		<p style="margin-left:40px;">Roman Catholic</p>
+
+<br>
+
+<h2><strong>EDUCATIONAL BACKGROUND</strong></h2>
+	<p style="margin-left:20px;"><strong>TERTIARY:</strong></p>
+		<p style="margin-left:40px;">Bachelor of Science in Nursing</p>
+		<p style="margin-left:40px;">Mindanao State University - Iligan Institute of Technology</p>
+		<p style="margin-left:40px;">Tibanga, Iligan City, Lanao Del Norte</p>
+		<p style="margin-left:40px;">2023-2027</p>
+
+	<p style="margin-left:20px;"><strong>SECONDARY:</strong></p>
+		<p style="margin-left:40px;">Mindanao State University - Iligan Institute of Technology Iligan Developmental School</p>
+		<p style="margin-left:40px;">Tibanga, Iligan City, Lanao Del Norte</p>
+		<p style="margin-left:40px;">GRADUATED: 2023</p>
+		<p style="margin-left:40px;">2016-2023</p>
+
+	<p style="margin-left:20px;"><strong>PRIMARY:</strong></p>
+		<p style="margin-left:40px;">Iligan Medical Center College Basic Education Department</p>
+		<p style="margin-left:40px;">Pala-o, Iligan City, Lanao Del Norte</p>
+		<p style="margin-left:40px;">GRADUATED: 2016</p>
+		<p style="margin-left:40px;">2011-2016</p>
+
+<br>
+<h2><strong>LANGUAGE</strong></h2>
+<p style="margin-left:20px;">English (C1)</p>
+<p style="margin-left:20px;">Filipino/Tagalog (Native)</p>
+<p style="margin-left:20px;">Cebuano (Native)</p>
+<p style="margin-left:20px;">Spanish (B1)</p>
+<p style="margin-left:20px;">Japanese (N5)</p>
+
+</td>
+</tr>
+
+
+
+<tr>
+<td>
+
+<p style="margin-left:60px; margin-top:-90px;"> ● Administered medications safely via oral, subcutaneous, intramuscular, and intravenous routes.</p>
+
+<p style="margin-left:60px;"> ● Educated patients on drug indications, potential side effects, and strict compliance. </p>
+
+	<p style="margin-left:20px;"><strong>Barangay Health Center (2024-2025)</strong></p>
+		<p style="margin-left:40px;">Community health Student Nurse</p>
+<p style="margin-left:60px;"> ● Conducted community health needs assessments and epidemiological survey tracking.</p>
+
+<p style="margin-left:60px;"> ● Executed home visits to deliver home-based clinical care, prenatal monitoring, and elder care.</p>
+
+<p style="margin-left:60px;"> ● Organized public health outreach clinics for immunizations, nutrition programs, and sanitation education.</p>
+
+<p style="margin-left:60px;"> ● Collaborated with Barangay Health Workers (BHWs) to implement local health initiatives.</p>
+
+	<p style="margin-left:20px;"> <strong>Adventist Medical Center Hospital (2025) </strong></p>
+		<p style="margin-left:40px;">Medication Student Nurse</p>
+<p style="margin-left:60px;"> ● Consistently applied the 10 Rights of Medication Administration before drug delivery.</p>
+
+<p style="margin-left:60px;"> ● Calculated complex intravenous flow rates, dosage unit conversions, and dilution volumes.</p>
+
+<p style="margin-left:60px;"> ● Administered medications safely via oral, subcutaneous, intramuscular, and intravenous routes.</p>
+
+<p style="margin-left:60px;"> ● Educated patients on drug indications, potential side effects, and strict compliance. </p>
+
+
+		<p style="margin-left:40px;">Ward Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Conducted head-to-toe physical assessments and recorded baseline clinical measurements. </p>
+
+<p style="margin-left:60px;"> ● Prioritized multi-patient care tasks, administering hygiene care, bed turnover, and wound dressings.</p>
+
+<p style="margin-left:60px;"> ● Formulated and executed individual nursing care plans aligned with physician orders.</p>
+
+<p style="margin-left:60px;"> ● Conducted SBAR (Situation-Background-Assessment-Recommendation) shift handovers to staff nurses.</p>
+
+
+	<p style="margin-left:20px;"> <strong>Vicente Sotto Memorial Medical Center (2026)</strong></p>
+		<p style="margin-left:40px;">Medication Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Consistently applied the 10 Rights of Medication Administration before drug delivery.</p>
+
+<p style="margin-left:60px;"> ● Calculated complex intravenous flow rates, dosage unit conversions, and dilution volumes.</p>
+
+<p style="margin-left:60px;"> ● Administered medications safely via oral, subcutaneous, intramuscular, and intravenous routes.</p>
+
+<p style="margin-left:60px;"> ● Educated patients on drug indications, potential side effects, and strict compliance. </p>
+
+		<p style="margin-left:40px;">Orthopedic Ward Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Performed routine neurovascular assessments (5 Ps: Pain, Pulse, Pallor, Paresthesia, Paralysis) on affected extremities.</p>
+
+<p style="margin-left:60px;"> ● Maintained skin integrity and alignment for patients in casts, splints, and traction setups.</p>
+
+<p style="margin-left:60px;"> ● Assisted physical therapy teams with early patient mobilization, transfer safety, and assistive device usage.</p>
+
+<p style="margin-left:60px;"> ● Managed surgical site wound dressings, drains, and post-op pain management.</p>
+
+
+		<p style="margin-left:40px;">Neurology Ward Student Nurse</p>
+
+<p style="margin-left:60px;"> ● Executed frequent neurological assessments using the Glasgow Coma Scale (GCS), pupil reactivity checks, and cranial nerve assessments.</p>
+
+<p style="margin-left:60px;"> ● Initiated fall risk precautions and seizure safety protocols for high-risk neurological patients.</p>
+
+<p style="margin-left:60px;"> ● Monitored for sudden shifts in intracranial pressure (ICP) symptoms or neurological decline.</p>
+
+<p style="margin-left:60px;"> ● Assisted dysphagic patients during oral intake using aspiration precaution guidelines. </p>
+
+
+		<p style="margin-left:40px;">Psychiatric Ward Student Nurse</p>		
+	
+<p style="margin-left:60px;"> ● Built therapeutic, non-judgmental nurse-patient relationships while maintaining strict clinical boundaries.</p>
+
+<p style="margin-left:60px;"> ● Conducted Mental Status Examinations (MSE) to assess mood, affect, thought processes, and safety risks. </p>
+
+<p style="margin-left:60px;"> ● Maintained a safe, therapeutic environment by monitoring self-harm and environmental safety risks.</p>
+
+<p style="margin-left:60px;"> ● Utilized verbal de-escalation strategies and facilitated psychoeducational coping groups.</p>
+
+
+
+	<h2><strong>OTHER WORK EXPERIENCE</strong></h2>
+	<p style="margin-left:20px;">Transcription (2025)</p>	
+			<p style="margin-left:40px;"> ● Transcribed and processed clinical dictations, medical lectures, and case studies using precise anatomical, pharmacological, and clinical terminology.</p>
+
+<p style="margin-left:40px;"> ● Converted multi-speaker audio and video files into clean-read or verbatim text with 98%+ baseline accuracy, incorporating precise speaker identification and timestamps.</p>
+
+<p style="margin-left:40px;"> ● Maintained strict confidentiality and data privacy (HIPAA awareness) when handling sensitive Personal Health Information (PHI) and academic research data.</p>
+
+<p style="margin-left:40px;"> ● Audited, proofread, and edited transcripts against raw audio to eliminate grammatical errors, context discrepancies, and formatting inconsistencies under tight deadlines.</p>
+
+
+<p style="margin-left:40px;"> ● Adhered to custom client style guides, managing variable audio quality and complex technical jargon to produce publishable, standardized documents.
+</p>	
+
+</td>
+
+</tr>
+
+
+
+<tr>
+<br>
+<td><h2 style="margin-left:600px;"><strong>REFERENCE</strong></h2></td>
+</tr>
+
+
+<tr>
+<td>
+	<h3 style="margin-left:250px;"><strong>Dr. Kyla I. Newton, PhD, RN</strong></h3>	
+	<h4 style="margin-left:250px;">Gregorio T. Lluch Memorial Hospital Doctor</h4>
+	<h5 style="margin-left:250px;"> <strong>Phone:</strong> 0955 XXX XX22 </h5>
+	<h5 style="margin-left:250px;"> <strong>Email:</strong> Dr.Newton@gmail.com</h5>
+</td>
+
+<td>
+	<h3 style="margin-left:-150px;"><strong>Mr. John Ethan R. Kingsman, RN</strong></h3>	
+	<h4 style="margin-left:-150px;">Adventist Medical Center Head Nurse</h4>
+	<h5 style="margin-left:-150px;"> <strong>Phone:</strong> 0969 XXX XX04 </h5>
+	<h5 style="margin-left:-150px;"> <strong>Email:</strong> JohnERooke@outlook.com</h5>
+</td>
+</tr>
+
+
+
+		</table>
+
+
+	 
+            </div>
+<br>
+<a href="#" class="overlay-btn" onclick="openServiceDetail('Drawing'); return false;" style="margin-left:1200px;"><i class="fa-solid fa-download">  Download</i></a>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DACJM. Made with HTML and CSS. All rights reserved.</p>
+        </footer>
+
+        <script>
+          
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "280px";
+                document.getElementById("navOverlay").classList.add("active");
+            }
+
+          
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("navOverlay").classList.remove("active");
+            }
+
+          
+            function openServiceDetail(serviceName) {
+                console.log("Selected service:", serviceName);
+            }
+
+          
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    closeNav();
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cythie - Services</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Fontdiner+Swanky&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <style>
+            {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0f111a;
+                background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                                  linear-gradient(135deg, #688ef5 0%, #1a1c2e 100%);
+                background-size: 30px 30px, 100% 100%;
+                background-repeat: repeat, no-repeat;
+                background-attachment: fixed;
+                font-family: 'Inter', Arial, sans-serif;
+                color: #ffffff;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .header-banner {
+                background: linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.6) 100%),
+                            url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+                height: 90px;         
+                display: flex;         
+                align-items: center;
+                justify-content: center; 
+                color: #ffffff;
+                font-family: "Fontdiner Swanky", cursive; 
+                font-size: 2.8rem;
+                letter-spacing: 1px;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.3);
+                position: relative;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .site {
+                text-decoration: none;
+                color: #ffffff;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            .site:hover {
+                color: #e2e8f0;
+                transform: scale(1.02);
+            }
+
+            .menu-btn {
+                position: fixed;
+                top: 15px;
+                right: 25px;
+                font-size: 36px;
+                cursor: pointer;
+                z-index: 100;
+                color: #ffffff;
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(8px);
+                width: 55px;
+                height: 55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .menu-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: rotate(90deg);
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                right: 0;
+                background-color: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(15px);
+                overflow-x: hidden;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding-top: 80px;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.7);
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidenav a {
+                padding: 14px 20px 14px 40px;
+                text-decoration: none;
+                font-size: 22px;
+                font-weight: 500;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+
+            .sidenav a:hover {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.08);
+                padding-left: 48px;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 40px;
+                margin-left: 50px;
+                color: #94a3b8;
+                cursor: pointer;
+            }
+
+            .sidenav .closebtn:hover {
+                color: #ffffff;
+            }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(3px);
+                z-index: 999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .main-content {
+                max-width: 1400px;
+                margin: 0 auto;
+                width: 100%;
+                padding: 20px 25px;
+                flex: 1;
+            }
+
+            .page-title {
+                font-family: 'Inter', sans-serif;
+                margin-left: 10px;
+                margin-bottom: 25px;
+                font-size: 42px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                background: linear-gradient(90deg, #ffffff 0%, #cbd5e1 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .page-title::after {
+                content: '';
+                flex: 1;
+                height: 2px;
+                background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            }
+
+            #container {
+                background-color: rgba(255, 255, 255, 0.02);
+                border-radius: 30px;
+                padding: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+            }   
+
+            #myDIV {
+                height: 650px;
+                display: grid;
+                gap: 15px;
+                grid-template-areas:
+                    "a b c f f"
+                    "a b c f f"
+                    "a b d g g"
+                    "a b d g g" 
+                    "e e d h h"
+                    "e e d h h";
+            }
+
+            #myDIV div.grid-item {
+                position: relative; 
+                background-color: #1e293b;
+                overflow: hidden; 
+                min-width: 0;
+                min-height: 0;
+                padding: 0;
+                border-radius: 20px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            }
+
+            #myDIV div.grid-item:hover {
+                border-color: rgba(255, 255, 255, 0.4);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            }
+
+            #myDIV div.grid-item img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+                transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+
+            #myDIV div.grid-item:hover img {
+                transform: scale(1.12);
+            }
+
+            .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(15, 23, 42, 0.92) 80%);
+                backdrop-filter: blur(6px);
+                color: #ffffff;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 24px;
+                box-sizing: border-box;
+                opacity: 0;
+                transform: translateY(15px);
+                transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                pointer-events: none;
+            }
+
+            #myDIV div.grid-item:hover .overlay,
+            #myDIV div.grid-item:focus-within .overlay {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            .overlay .tag {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                font-size: 11px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: #38bdf8;
+                background: rgba(56, 189, 248, 0.15);
+                padding: 4px 10px;
+                border-radius: 20px;
+                width: fit-content;
+                margin-bottom: 8px;
+                border: 1px solid rgba(56, 189, 248, 0.3);
+            }
+
+            .overlay h3 {
+                margin: 0 0 6px 0;
+                font-size: 22px;
+                font-weight: 700;
+                font-family: 'Inter', sans-serif;
+                color: #ffffff;
+                line-height: 1.2;
+            }
+
+            .overlay p {
+                margin: 0 0 16px 0;
+                font-size: 13.5px;
+                line-height: 1.45;
+                color: #cbd5e1;
+                font-family: 'Inter', sans-serif;
+            }
+
+            .overlay-btn {
+                align-self: flex-start;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: #ffffff;
+                color: #0f172a;
+                border: none;
+                padding: 8px 16px;
+                border-radius: 12px;
+                font-size: 13px;
+                font-weight: 600;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+            .overlay-btn:hover {
+                background: #38bdf8;
+                color: #ffffff;
+                transform: translateX(4px);
+            }
+
+            .item1 { grid-area: a; }
+            .item2 { grid-area: b; }
+            .item3 { grid-area: c; }
+            .item4 { grid-area: d; }
+            .item5 { grid-area: e; }
+            .item6 { grid-area: f; }
+            .item7 { grid-area: g; }
+            .item8 { grid-area: h; }
+
+
+            footer {
+                margin-top: 40px;
+                padding: 25px 20px;
+                text-align: center;
+                background: rgba(15, 23, 42, 0.8);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            footer p {
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                color: #94a3b8;
+            }
+
+            @media screen and (max-width: 1024px) {
+                #myDIV {
+                    height: auto;
+                    grid-template-areas: none;
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-auto-rows: 280px;
+                }
+
+                .item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8 {
+                    grid-area: auto;
+                }
+
+                .header-banner {
+                    font-size: 2rem;
+                    height: 75px;
+                }
+            }
+
+            @media screen and (max-width: 640px) {
+                #myDIV {
+                    grid-template-columns: 1fr;
+                    grid-auto-rows: 250px;
+                }
+
+                .page-title {
+                    font-size: 32px;
+                }
+
+                .header-banner {
+                    font-size: 1.6rem;
+                }
+
+                .overlay {
+                    padding: 16px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header-banner">
+            <a href="home.html" class="site">A Gentle Chronicle</a>
+            <span class="menu-btn" onclick="openNav()" aria-label="Open Navigation">☰</span>
+            
+            <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="services.html"><i class="fa-solid fa-list-check"></i> Services</a>
+                <a href="resume.html"><i class="fa-solid fa-file-lines"></i> Resume</a>
+                <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
+                <a href="testi.html"><i class="fa-solid fa-comment-dots"></i> Testimonials</a>
+                <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <h1 class="page-title">SERVICES</h1>
+            
+            <div id="container">
+                <div id="myDIV">
+
+                    <div class="grid-item item1" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1532499016263-f2c3e89de9cd?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Culinary & Culinary Care">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-utensils"></i>Whisk and warmth</span>
+                            <h3>Cooking & Baking</h3>
+                            <p>Pastries, sweet treats, and simple, tasty dishes—including healthier options.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Cooking'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="grid-item item2" tabindex="0">
+                        <img src="images/draw.png" alt="Drawing & Digital Illustration">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-palette"></i>Lines with Life</span>
+                            <h3>Illustration & Sketch</h3>
+                            <p>Light digital or traditional sketches filled with creativity and emotion.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Drawing'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+
+                    <div class="grid-item item3" tabindex="0">
+                        <img src="images/chess.jpg" alt="Chess">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-chess"></i> A Game of thought</span>
+                            <h3>Chess Partner</h3>
+                            <p>A partner for chess, puzzles, and little challenges that make you think.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Chess'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+
+                    <div class="grid-item item4" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=800&auto=format&fit=crop" alt="Creative Writing">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-pen-nib"></i> Words and Wonder</span>
+                            <h3>Creative Writing</h3>
+                            <p>Poems, essays, rephrasing, and transcripts—turning thoughts into words.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Writing'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+
+                    <div class="grid-item item5" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?q=80&w=800&auto=format&fit=crop" alt="Language Translation">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-language"></i> Linguistics</span>
+                            <h3>Translation Services</h3>
+                            <p>Accurate cross-cultural translation, proofreading, and multilingual document localization.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Translation'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+
+                    <div class="grid-item item6" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1603518784464-22d0fe80c546?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Empathetic Listening">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-headset"></i> Well-being</span>
+                            <h3>Active Listening</h3>
+                            <p>A compassionate, non-judgmental space to share thoughts, unburden feelings, and be heard.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Listening'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="grid-item item7" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop" alt="Companion Buddy">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-users"></i> Companionship</span>
+                            <h3>Activity Partner</h3>
+                            <p>A buddy for sports, outings, reading, hobbies, errands, and more.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Buddy'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                 
+                    <div class="grid-item item8" tabindex="0">
+                        <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?q=80&w=800&auto=format&fit=crop" alt="Organization & Productivity">
+                        <div class="overlay">
+                            <span class="tag"><i class="fa-solid fa-folder-tree"></i> Productivity</span>
+                            <h3>Space Organization</h3>
+                            <p>Digital decluttering, physical desk & room organization, and productivity system setup.</p>
+                            <a href="#" class="overlay-btn" onclick="openServiceDetail('Organization'); return false;">Explore Service <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DACJM. Made with HTML and CSS. All rights reserved.</p>
+        </footer>
+
+        <script>
+          
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "280px";
+                document.getElementById("navOverlay").classList.add("active");
+            }
+
+          
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("navOverlay").classList.remove("active");
+            }
+
+          
+            function openServiceDetail(serviceName) {
+                console.log("Selected service:", serviceName);
+            }
+
+          
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    closeNav();
+                }
+            });
+        </script>
+    </body>
+</html>

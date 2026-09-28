@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Cythie - About</title>
+        
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Fontdiner+Swanky&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <style>
+
+		:root {
+            --bg-pastel-blue: #aec6cf;
+            --binder-slate: #516c95;
+            --binder-dark: #3a5073;
+            --binder-border: #6b8aba;
+            --paper-light: #f8fafc;
+            --paper-lines: #e2e8f0;
+            --purple-accent: #a370f0;
+            --purple-glow: rgba(163, 112, 240, 0.35);
+            --text-main: #1e293b;
+            --text-sub: #475569;
+        }
+
+	.font-fleur { font-family: 'Fleur De Leah', cursive; }
+        .font-handwriting { font-family: 'Caveat', cursive; }
+		
+            {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body {
+                background-color: #0f111a;
+                background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0),
+                                  linear-gradient(135deg, #688ef5 0%, #1a1c2e 100%);
+                background-size: 30px 30px, 100% 100%;
+                background-repeat: repeat, no-repeat;
+                background-attachment: fixed;
+                font-family: 'Inter', Arial, sans-serif;
+                color: #ffffff;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .header-banner {
+                background: linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.6) 100%),
+                            url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+                height: 90px;         
+                display: flex;         
+                align-items: center;
+                justify-content: center; 
+                color: #ffffff;
+                font-family: "Fontdiner Swanky", cursive; 
+                font-size: 2.8rem;
+                letter-spacing: 1px;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.3);
+                position: relative;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .site {
+                text-decoration: none;
+                color: #ffffff;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            .site:hover {
+                color: #e2e8f0;
+                transform: scale(1.02);
+            }
+
+            .menu-btn {
+                position: fixed;
+                top: 15px;
+                right: 25px;
+                font-size: 36px;
+                cursor: pointer;
+                z-index: 100;
+                color: #ffffff;
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(8px);
+                width: 55px;
+                height: 55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                transition: all 0.3s ease;
+            }
+
+            .menu-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: rotate(90deg);
+            }
+
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                right: 0;
+                background-color: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(15px);
+                overflow-x: hidden;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding-top: 80px;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.7);
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidenav a {
+                padding: 14px 20px 14px 40px;
+                text-decoration: none;
+                font-size: 22px;
+                font-weight: 500;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+
+            .sidenav a:hover {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.08);
+                padding-left: 48px;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 40px;
+                margin-left: 50px;
+                color: #94a3b8;
+                cursor: pointer;
+            }
+
+            .sidenav .closebtn:hover {
+                color: #ffffff;
+            }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(3px);
+                z-index: 999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .main-content {
+                max-width: 1400px;
+                margin: 0 auto;
+                width: 100%;
+                padding: 20px 25px;
+                flex: 1;
+            }
+
+            .page-title {
+                font-family: 'Fleur De Leah', cursive;
+                margin-left: 10px;
+                margin-bottom: 25px;
+                font-size: 42px;
+                font-weight: 800;
+                letter-spacing: 2px;
+                background: linear-gradient(90deg, black 0%, #cbd5e1 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .page-title::after {
+                content: '';
+                flex: 1;
+                height: 2px;
+                background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
+            }
+
+            #container {
+                background-color: rgba(255, 255, 255, 0.02);
+                border-radius: 30px;
+                padding: 15px;
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+            }   
+
+
+
+            footer {
+                margin-top: 40px;
+                padding: 25px 20px;
+                text-align: center;
+                background: rgba(15, 23, 42, 0.8);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            footer p {
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                color: #94a3b8;
+            }
+
+
+        .testimonials-section {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 48px 25px 65px;
+        }
+
+        .testimonials-heading {
+            text-align: center;
+            margin-bottom: 42px;
+        }
+
+        .testimonials-heading .eyebrow {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid rgba(255,255,255,.28);
+            background: rgba(255,255,255,.10);
+            border-radius: 999px;
+            color: #e2e8f0;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            backdrop-filter: blur(8px);
+            margin-bottom: 15px;
+        }
+
+        .testimonials-heading h1 {
+            margin: 0;
+            font-family: 'Fleur De Leah', cursive;
+            font-size: clamp(58px, 7vw, 88px);
+            line-height: .9;
+            color: #fff;
+            text-shadow: 0 4px 18px rgba(0,0,0,.28);
+        }
+
+        .testimonials-heading p {
+            max-width: 650px;
+            margin: 18px auto 0;
+            color: #dbe4f0;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .testimonial-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 315px;
+            padding: 30px;
+            border-radius: 22px;
+            background: rgba(255,255,255,.96);
+            border: 1px solid rgba(255,255,255,.7);
+            box-shadow: 0 18px 40px rgba(0,0,0,.20);
+            overflow: hidden;
+            transition: transform .28s ease, box-shadow .28s ease;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: rgba(163,112,240,.10);
+            top: -65px;
+            right: -45px;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 25px 48px rgba(0,0,0,.27);
+        }
+
+        .quote-mark {
+            position: absolute;
+            top: 15px;
+            right: 24px;
+            font-family: Georgia, serif;
+            font-size: 70px;
+            line-height: 1;
+            color: #d9c7f5;
+            z-index: 1;
+        }
+
+        .testimonial-person {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 24px;
+        }
+
+        .person-photo {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 12px rgba(61,79,110,.25);
+            background: #dfe7f0;
+        }
+
+        .person-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #516c95;
+            font-size: 18px;
+            background: linear-gradient(135deg, #e9eef5, #d5deeb);
+        }
+
+        .person-info h3 {
+            margin: 0;
+            color: #26364e;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .person-info span {
+            display: block;
+            margin-top: 3px;
+            color: #8190a5;
+            font-size: 12px;
+        }
+
+        .testimonial-text {
+            position: relative;
+            z-index: 2;
+            margin: 0;
+            color: #4b5565;
+            font-size: 15px;
+            line-height: 1.8;
+            flex: 1;
+        }
+
+        .stars {
+            margin-top: 22px;
+            color: #a370f0;
+            font-size: 14px;
+            letter-spacing: 3px;
+        }
+
+        .testimonial-footer {
+            margin-top: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: rgba(255,255,255,.85);
+            font-size: 13px;
+        }
+
+        .testimonial-footer::before,
+        .testimonial-footer::after {
+            content: '';
+            width: 70px;
+            height: 1px;
+            background: rgba(255,255,255,.35);
+        }
+
+        @media screen and (max-width: 900px) {
+            .testimonial-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .testimonials-section {
+                padding: 35px 18px 50px;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .testimonial-card {
+                min-height: 280px;
+                padding: 25px;
+            }
+
+            .testimonials-heading p {
+                font-size: 14px;
+            }
+        }
+
+.client-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid #ffffff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.client-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+        </style>
+    </head>
+    <body class="p-3 sm:p-6 md:p-10 flex flex-col items-center justify-between">
+        <header class="header-banner">
+            <a href="home.html" class="site">A Gentle Chronicle</a>
+            <span class="menu-btn" onclick="openNav()" aria-label="Open Navigation">☰</span>
+
+            <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="home.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="services.html"><i class="fa-solid fa-list-check"></i> Services</a>
+                <a href="resume.html"><i class="fa-solid fa-file-lines"></i> Resume</a>
+                <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
+                <a href="testi.html"><i class="fa-solid fa-comment-dots"></i> Testimonials</a>
+                <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+            </div>
+        </header>
+
+        <main style="width:100%;">
+            <section class="testimonials-section">
+                <div class="testimonials-heading">
+                    <span class="eyebrow">Kind Words</span>
+                    <h1>Testimonials</h1>
+                    <p>A small collection of words from people who have experienced my work, support, and dedication.</p>
+                </div>
+
+                <div class="testimonial-grid">
+
+                    <article class="testimonial-card">
+                        <span class="quote-mark">“</span>
+                        <div class="testimonial-person">
+
+                            <div class="client-photo"><img src="images/cale.png" alt="Client 1"></div>
+                            <div class="person-info">
+                                <h3>Gabriel</h3>
+                                <span>Client / Customer</span>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">“Working with Cythie was such a smooth experience. She was easy to communicate with.”</p>
+                        <div class="stars" aria-label="Five stars">★★★★★</div>
+                    </article>
+
+
+                    <article class="testimonial-card">
+                        <span class="quote-mark">“</span>
+                        <div class="testimonial-person">
+                            <div class="client-photo"><img src="images/roe.jpg" alt="Client 2"></div>
+                            <div class="person-info">
+                                <h3>Roe</h3>
+                                <span>Client / Customer</span>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">“She listened to my ideas and was willing to make adjustments until everything felt right.”</p>
+                        <div class="stars" aria-label="Five stars">★★★★★</div>
+                    </article>
+
+
+                    <article class="testimonial-card">
+                        <span class="quote-mark">“</span>
+                        <div class="testimonial-person">
+                            <div class="client-photo"><img src="images/pan.png" alt="Client 3"></div>
+                            <div class="person-info">
+                                <h3>Pan</h3>
+                                <span>Friend</span>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">“She is most of the time quiet but I could tell that she really paid attention to the small details instead of simply finishing the task.”</p>
+                        <div class="stars" aria-label="Five stars">★★★★★</div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <span class="quote-mark">“</span>
+                        <div class="testimonial-person">
+                            <div class="client-photo"><img src="images/blue.jpg" alt="Client 4"></div>
+                            <div class="person-info">
+                                <h3>Blue</h3>
+                                <span>Client / Customer</span>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">“Was very open to feedback. I felt comfortable sharing what I wanted changed along the way.”</p>
+                        <div class="stars" aria-label="Five stars">★★★★★</div>
+                    </article>
+
+
+                    <article class="testimonial-card">
+                        <span class="quote-mark">“</span>
+                        <div class="testimonial-person">
+                            <div class="client-photo"><img src="images/tim.png" alt="Client 5"></div>
+                            <div class="person-info">
+                                <h3>Tim</h3>
+                                <span>Friend</span>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">“I liked how she combined creativity with practicality.”</p>
+                        <div class="stars" aria-label="Five stars">★★★★★</div>
+                    </article>
+
+                    <article class="testimonial-card">
+                        <span class="quote-mark">“</span>
+                        <div class="testimonial-person">
+                            <div class="client-photo"><img src="images/gus.jpg" alt="Client 6"></div>
+                            <div class="person-info">
+                                <h3>Gus</h3>
+                                <span>Client / Customer</span>
+                            </div>
+                        </div>
+                        <p class="testimonial-text">“A kind and responsible person to work with. She made the experience comfortable and showed genuine effort from beginning to end.”</p>
+                        <div class="stars" aria-label="Five stars">★★★★★</div>
+                    </article>
+                </div>
+
+                <div class="testimonial-footer">
+                    <span>Thank you for the kind words.</span>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DACJM. Made with HTML and CSS. All rights reserved.</p>
+        </footer>
+
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "280px";
+                document.getElementById("navOverlay").classList.add("active");
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("navOverlay").classList.remove("active");
+            }
+
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    closeNav();
+                }
+            });
+        </script>
+    </body>
+</html>

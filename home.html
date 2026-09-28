@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>A Gentle Chronicle - Home</title>
+
+               <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Fontdiner+Swanky&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+        <style>
+            {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                background-color: #0b0d19;
+                background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0),
+                                  linear-gradient(135deg, #688fe5 0%, #1a1c2e 100%);
+                background-size: 30px 30px, 100% 100%;
+                background-repeat: repeat, no-repeat;
+                background-attachment: fixed;
+                font-family: 'Inter', Arial, sans-serif;
+                color: #ffffff;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                overflow-x: hidden;
+            }
+
+     
+            h1.fleur-title, h2.fleur-title {
+                font-family: 'Fleur De Leah', cursive;
+                font-weight: 400;
+                color: #ffffff;
+                text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+                line-height: 1;
+		margin-top:10px;
+            }
+
+            h1.fleur-title {
+                font-size: clamp(50px, 6vw, 90px);
+            }
+
+            h2.fleur-title {
+                font-size: clamp(42px, 5vw, 75px);
+            }
+
+    
+            .header-banner {
+                background: linear-gradient(180deg, rgba(15,23,42,0.9) 0%, rgba(15,23,42,0.6) 100%),
+                            url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+                height: 90px;         
+                display: flex;         
+                align-items: center;
+                justify-content: center; 
+                color: #ffffff;
+                font-family: "Fontdiner Swanky", cursive; 
+                font-size: clamp(1.8rem, 4vw, 2.8rem);
+                letter-spacing: 1px;
+                text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 255, 255, 0.3);
+                position: relative;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                z-index: 10;
+            }
+
+            .site {
+                text-decoration: none;
+                color: #ffffff;
+                transition: transform 0.3s ease, color 0.3s ease;
+            }
+
+            .site:hover {
+                color: #e2e8f0;
+                transform: scale(1.02);
+            }
+
+
+            .menu-btn {
+                position: fixed;
+                top: 15px;
+                right: 25px;
+                font-size: 32px;
+                cursor: pointer;
+                z-index: 100;
+                color: #ffffff;
+                background: rgba(15, 23, 42, 0.7);
+                backdrop-filter: blur(8px);
+                width: 55px;
+                height: 55px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+                transition: all 0.3s ease;
+            }
+
+            .menu-btn:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: rotate(90deg);
+            }
+
+
+            .sidenav {
+                height: 100%;
+                width: 0;
+                position: fixed;
+                z-index: 1000;
+                top: 0;
+                right: 0;
+                background-color: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(15px);
+                overflow-x: hidden;
+                transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding-top: 80px;
+                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.7);
+                border-left: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .sidenav a {
+                padding: 14px 20px 14px 40px;
+                text-decoration: none;
+                font-size: 22px;
+                font-weight: 500;
+                color: #94a3b8;
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+
+            .sidenav a:hover {
+                color: #ffffff;
+                background: rgba(255, 255, 255, 0.08);
+                padding-left: 48px;
+            }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 15px;
+                right: 25px;
+                font-size: 40px;
+                color: #94a3b8;
+                cursor: pointer;
+            }
+
+            .sidenav .closebtn:hover {
+                color: #ffffff;
+            }
+
+            .nav-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(3px);
+                z-index: 999;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.4s ease;
+            }
+
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .carousel {
+                margin: 40px auto 30px auto;
+                width: 100%;
+                display: flex;
+                overflow: hidden;
+                mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+                -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+            }
+
+            .group {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                gap: 1.5rem;
+                animation: spin 22s infinite linear;
+                padding-right: 1.5rem;
+                flex-shrink: 0;
+            }
+
+            .card {
+                width: 220px;	
+                height: 140px;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                transition: transform 0.3s ease;
+            }
+
+            .card:hover {
+                transform: scale(1.05);
+            }
+
+            .card img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            @keyframes spin {
+                from { transform: translateX(0); }
+                to { transform: translateX(-100%); }
+            }
+
+        
+            .main-content {
+                max-width: 1400px;
+                margin: 0 auto;
+                width: 100%;
+                padding: 10px 25px 40px 25px;
+                flex: 1;
+            }
+
+            .hero-container {
+                width: 95%;
+                min-height: 400px;
+                padding: 40px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 40px;
+                background: rgba(30, 41, 59, 0.55);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 30px;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+                margin-bottom: 40px;
+		
+            }
+
+            .circle-frame {
+                width: 260px;
+                height: 260px;
+                min-width: 260px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 4px solid rgba(255, 255, 255, 0.8);
+                box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+                position: relative;
+                transition: transform 0.4s ease;
+            }
+
+            .circle-frame:hover {
+                transform: scale(1.03) rotate(2deg);
+            }
+
+            .circle-frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .speech-bubble {
+                position: relative;
+                background: linear-gradient(135deg, rgba(81, 108, 149, 0.85) 0%, rgba(30, 41, 59, 0.95) 100%);
+                border-radius: 24px;
+                display: flex;
+                flex-direction: column;
+                padding: 2.5rem;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+                flex: 1;
+            }
+
+            .speech-bubble::before {
+                content: '';
+                position: absolute;
+                left: -24px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 0;
+                height: 0;
+                border-top: 16px solid transparent;
+                border-bottom: 16px solid transparent;
+                border-right: 24px solid rgba(81, 108, 149, 0.95);
+            }
+
+            .speech-bubble p {
+                font-family: 'Inter', sans-serif;
+                font-size: 17px;
+                line-height: 1.7;
+                color: #cbd5e1;
+                text-align: justify;
+                margin-top: 15px;
+            }
+
+            .highlight-text {
+                color: #ffffff;
+                font-weight: 700;
+                text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            }
+
+            .buttons {
+                width: 100%;
+                padding: 20px 0;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 25px;
+                justify-content: center;
+                margin-bottom: 50px;
+                flex-wrap: wrap;
+            }
+
+            .cssbuttons-io {
+                position: relative;
+                font-family: 'Inter', sans-serif;
+                font-weight: 700;
+                font-size: 18px;
+                letter-spacing: 0.05em;
+                border-radius: 30px;
+                cursor: pointer;
+                border: none;
+                background: linear-gradient(135deg, #8e2de2 0%, #4a00e0 100%);
+                color: #ffffff;
+                overflow: hidden;
+                box-shadow: 0 8px 20px rgba(142, 45, 226, 0.4);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-decoration: none;
+                display: inline-block;
+            }
+
+            .cssbuttons-io:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 12px 25px rgba(142, 45, 226, 0.6);
+            }
+
+            .cssbuttons-io svg {
+                width: 1.2em;
+                height: 1.2em;
+                margin-left: 0.4em;
+            }
+
+            .cssbuttons-io span {
+                position: relative;
+                z-index: 10;
+                transition: color 0.4s;
+                display: inline-flex;
+                align-items: center;
+                padding: 0.9em 1.6em;
+                gap: 8px;
+            }
+
+            .cssbuttons-io::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -10%;
+                width: 120%;
+                height: 100%;
+                background: rgba(15, 23, 42, 0.85);
+                z-index: 0;
+                transform: skew(30deg);
+                transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+            }
+
+            .cssbuttons-io:hover::before {
+                transform: translate3d(100%, 0, 0);
+            }
+
+   
+            .section-box {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            .section-header {
+                display: flex;
+                align-items: baseline;
+                gap: 20px;
+                margin-bottom: 5px;
+                flex-wrap: wrap;
+            }
+
+            .section-subtext {
+                font-size: 16px;
+                color: #94a3b8;
+                margin-bottom: 30px;
+            }
+
+            .container3 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+                gap: 30px;
+                padding: 50px;
+                background: rgba(30, 41, 59, 0.4);
+                backdrop-filter: blur(10px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 30px;
+                justify-items: center;
+		margin-left: 30px;
+	
+            }
+
+            .skill-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .frame {
+                width: 220px;
+                height: 220px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 4px solid #ffffff;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(56, 189, 248, 0.3);
+                transition: transform 0.4s ease, border-color 0.4s ease;
+            }
+
+            .skill-card:hover .frame {
+                transform: scale(1.06);
+                border-color: #38bdf8;
+            }
+
+            .frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .skill-label {
+                font-family: 'Inter', sans-serif;
+                font-weight: 800;
+                color: #ffffff;
+                font-size: 20px;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+
+            .button2cont {
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 25px;
+            }
+
+            .button1 {
+                background: #8e2de2;
+                color: white;
+                font-family: 'Inter', sans-serif;
+                padding: 0.35em 3.3em 0.35em 1.4em;
+                font-size: 16px;
+                font-weight: 700;
+                border-radius: 30px;
+                border: none;
+                letter-spacing: 0.05em;
+                display: flex;
+                align-items: center;
+                box-shadow: 0 8px 20px rgba(142, 45, 226, 0.3);
+                overflow: hidden;
+                position: relative;
+                height: 3em;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-decoration: none;
+            }
+
+            .button1 .icon {
+                background: white;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 2.3em;
+                width: 2.3em;
+                border-radius: 50%;
+                right: 0.4em;
+                transition: all 0.3s ease;
+            }
+
+            .button1:hover .icon {
+                width: calc(100% - 0.8em);
+                border-radius: 20px;
+            }
+
+            .button1 .icon svg {
+                width: 1.1em;
+                transition: transform 0.3s;
+                fill: #8e2de2;
+            }
+
+            .button1:hover .icon svg {
+                transform: translateX(0.2em);
+            }
+
+            .container4 {
+                width: 95%;
+                background: linear-gradient(135deg, rgba(81, 108, 149, 0.6) 0%, rgba(30, 41, 59, 0.85) 100%);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                border-radius: 30px;
+                padding: 40px;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+                margin-top: 60px;
+            }
+
+		
+
+            .social-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 25px;
+                margin-top: 35px;
+            }
+
+
+	    .social-grid2 {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .social-card {
+                background: rgba(15, 23, 42, 0.6);
+                border-radius: 20px;
+                padding: 25px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+                text-decoration: none;
+                color: #ffffff;
+            }
+
+            .social-card:hover {
+                transform: translateY(-5px);
+                border-color: rgba(56, 189, 248, 0.5);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            }
+
+            .frame2 {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                overflow: hidden;
+                border: 4px solid #38bdf8;
+                box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+                margin-bottom: 15px;
+                transition: transform 0.3s ease;
+            }
+		
+	    .social-card:hover .frame2 {
+                transform: scale(1.08);
+            }
+
+            .frame2 img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+	
+
+    	    .frame3 {
+                width: 100px;
+                height: 100px;
+                border-radius: 10%;
+                overflow: hidden;
+                border: 1px solid #38bdf8;
+                box-shadow: 0 0 5px rgba(56, 189, 248, 0.3);
+                margin-bottom: 15px;
+                transition: transform 0.3s ease;
+            }
+	
+	.social-card:hover .frame3 {
+                transform: scale(1.08);
+            }
+
+            .frame3 img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+	
+           
+
+            .social-title {
+                font-weight: 800;
+                font-size: 18px;
+                letter-spacing: 1px;
+                margin-bottom: 6px;
+                color: #ffffff;
+            }
+
+            .social-handle {
+                color: #cbd5e1;
+                font-size: 14px;
+                word-break: break-word;
+            }
+
+
+            footer {
+                margin-top: 80px;
+                padding: 30px 20px;
+                text-align: center;
+                background: rgba(15, 23, 42, 0.9);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            footer p {
+                font-family: 'Inter', sans-serif;
+                font-size: 14px;
+                color: #94a3b8;
+            }
+
+
+            @media screen and (max-width: 900px) {
+                .hero-container {
+                    flex-direction: column;
+                    padding: 25px;
+                    text-align: center;
+                }
+
+                .speech-bubble::before {
+                    display: none;
+                }
+
+                .speech-bubble p {
+                    text-align: left;
+                }
+
+                .button2cont {
+                    justify-content: center;
+                }
+            }
+
+            @media screen and (max-width: 600px) {
+                .container4 {
+                    padding: 20px;
+                }
+
+                .circle-frame {
+                    width: 200px;
+                    height: 200px;
+                    min-width: 200px;
+                }
+
+                .speech-bubble {
+                    padding: 1.5rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header-banner">
+            <a href="home.html" class="site">A Gentle Chronicle</a>
+            <span class="menu-btn" onclick="openNav()" aria-label="Open Navigation">☰</span>
+            
+            <div id="navOverlay" class="nav-overlay" onclick="closeNav()"></div>
+
+            <div id="mySidenav" class="sidenav">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <a href="page.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="services.html"><i class="fa-solid fa-list-check"></i> Services</a>
+                <a href="resume.html"><i class="fa-solid fa-file-lines"></i> Resume</a>
+                <a href="about.html"><i class="fa-solid fa-user"></i> About</a>
+                <a href="testi.html"><i class="fa-solid fa-comment-dots"></i> Testimonials</a>
+                <a href="index.html"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+            </div>
+        </header>
+
+        <div class="carousel">
+            <div class="group">
+                <div class="card"><img src="images/home1.jpg" alt="Home preview 1"></div>
+                <div class="card"><img src="images/home2.jpg" alt="Home preview 2"></div>
+                <div class="card"><img src="images/home3.jpg" alt="Home preview 3"></div>
+                <div class="card"><img src="images/home4.jpg" alt="Home preview 4"></div>
+                <div class="card"><img src="images/home5.jpg" alt="Home preview 5"></div>
+                <div class="card"><img src="images/home6.jpg" alt="Home preview 6"></div>
+            </div>
+
+            <div aria-hidden="true" class="group">
+                <div class="card"><img src="images/home1.jpg" alt="Home preview 1"></div>
+                <div class="card"><img src="images/home2.jpg" alt="Home preview 2"></div>
+                <div class="card"><img src="images/home3.jpg" alt="Home preview 3"></div>
+                <div class="card"><img src="images/home4.jpg" alt="Home preview 4"></div>
+                <div class="card"><img src="images/home5.jpg" alt="Home preview 5"></div>
+                <div class="card"><img src="images/home6.jpg" alt="Home preview 6"></div>
+            </div>
+        </div>
+
+        <main class="main-content">
+            <section class="hero-container">
+                <div class="circle-frame">
+                    <img src="images/homepfp.jpg" alt="Profile">
+                </div>
+            
+                <div class="speech-bubble">
+                    <h1 class="fleur-title">Welcome!</h1>
+                    <p style="margin-top: -50px;">
+                        Hi there, <span class="highlight-text">I’m Dexie</span>, and <span class="highlight-text">I’m so glad you’re here!</span> I am a level 4 Nursing student with a passion for becoming a Nurse. I created <span class="highlight-text">this website as a personal hub</span> to showcase who I am, the skills I've built, and exactly what I can do. From my technical expertise to the unique creative solutions I bring to the table, this space is a look into my background and capabilities.
+                        <br><br>
+                        <span class="highlight-text">Take a look around to see what I can do, and feel free to reach out if you'd like to collaborate!</span>
+                    </p>
+                </div>
+            </section>
+
+            <div class="buttons">
+                <a href="#skills" class="cssbuttons-io">
+                    <span>View Skills
+                        <svg class="chevron-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+                            <path d="M4 6l8 8 8-8" />
+                            <path d="M4 12l8 8 8-8" />
+                        </svg>
+                    </span>
+                </a>
+                
+                <a href="#socials" class="cssbuttons-io">
+                    <span>Get in Touch
+                        <svg class="chevron-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+                            <path d="M4 6l8 8 8-8" />
+                            <path d="M4 12l8 8 8-8" /> 
+                        </svg>
+                    </span>
+                </a>  
+            </div>
+
+            <section id="skills" class="section-box">
+		<br>
+                <div class="section-header">
+                    <h2 class="fleur-title" style="margin-bottom: 0px;">What I can Do...</h2>
+                </div>
+                <p class="section-subtext">Here’s a glimpse of what I can do. Want to see more? <span class="highlight-text">Visit Services</span> to explore everything I offer.</p>
+
+
+		<br>
+		<br>
+		
+                <div class="container3">
+                    <div class="skill-card">
+                        <div class="frame">
+                            <img src="https://plus.unsplash.com/premium_photo-1684444605542-93725082d214?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Transcription">
+                        </div>
+                        <span class="skill-label">TRANSCRIPTION</span>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="frame">
+                            <img src="https://images.unsplash.com/photo-1592487501226-7ed5e5dc80f2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dp" alt="Translation">
+                        </div>
+                        <span class="skill-label">TRANSLATION</span>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="frame">
+                            <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=600&auto=format&fit=crop" alt="Design">
+                        </div>
+                        <span class="skill-label">DESIGN</span>
+                    </div>
+                </div>
+
+                <div class="button2cont">
+                    <a href="services.html" class="button1">
+                        Visit Services
+                        <div class="icon">
+                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0 0h24v24H0z" fill="none"></path>
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+
+                    <h2 class="fleur-title" style="color: #ffffff; margin-bottom: 10px; margin-left: 500px; margin-top: 100px;">Why work with me?</h2>
+                    <p style="color: #cbd5e1; font-size: 16px; margin-left: 630px; margin-bottom:50px;">Here lies <span class="highlight-text"> My Core Strengths</span>.</p>
+
+                    <div class="social-grid2" style="margin-bottom: 1px;">
+                        <a target="_blank" class="social-card">
+                            <br>
+                            <div class="social-title">DETAIL-ORIENTED</div>	
+				<br>
+                            <div class="social-handle">I pay <span class="highlight-text">close attention to details</span> and like to make sure that my work is accurate, organized, and properly done. I tend to double-check my work because I believe that even small details can make a difference.</div>
+				<br>
+                        </a>
+
+                        <a target="_blank" class="social-card">
+				<br>
+                            <div class="social-title">PERSISTENT</div>
+				<br>
+                            <div class="social-handle">I <span class="highlight-text">do not easily give up when something becomes difficult</span>. I may get frustrated or complain along the way, but I still find a way to finish what I started and do my best to accomplish what is expected of me.</div>
+				<br>
+                        </a>
+
+                        
+                 
+                        <a target="_blank" class="social-card">
+                            <br>
+                            <div class="social-title">ADAPTABLE</div>
+				<br>
+                            <div class="social-handle">I can <span class="highlight-text">adjust to different situations, people, and working environments</span>. When things do not go according to plan, I try to understand the situation first and find a way to work with what I have.</div>
+				<br>
+                        </a>
+
+                        <a target="_blank" class="social-card">
+                            <br>
+                            <div class="social-title">VERSATILE</div>
+				<br>
+                            <div class="social-handle">I am <span class="highlight-text">open to learning different skills and taking on different responsibilities</span>. I can adjust my approach depending on what a task requires and I am willing to step outside my comfort zone when necessary.</div>
+				<br>
+                        </a>
+
+			<a target="_blank" class="social-card">
+                           <br>
+                            <div class="social-title">PERSEVERANCE</div>
+			   <br>
+                            <div class="social-handle">I believe that being tired, frustrated, or having a difficult day does not mean I should stop. <span class="highlight-text">I try to keep moving forward, learn from the challenges I encounter, and finish what I need to accomplish</span>.</div>
+			   <br>
+                        </a>
+
+                        
+                    </div>		
+
+                </div>
+
+
+	<br>
+	<br>
+	<br>
+
+
+
+	
+
+
+
+            <section id="socials" class="section-box">
+                <div class="container4">
+                    <h2 class="fleur-title" style="color: #ffffff; margin-bottom: 10px;">How to contact?</h2>
+                    <p style="color: #cbd5e1; font-size: 16px;">Want to know more about me? Feel free to <span class="highlight-text">Visit My Social Media Profiles</span> if you have any questions or would like to connect.</p>
+
+                    <div class="social-grid">
+                        <a href="https://www.facebook.com/dexieanne.montebon.5" target="_blank" class="social-card">
+                            <div class="frame2">
+                                <img src="images/fb.png" alt="Facebook Icon">
+                            </div>
+                            <div class="social-title">FACEBOOK</div>
+                            <div class="social-handle">Dexie Anne Montebon</div>
+                        </a>
+
+                        <a href="https://www.instagram.com/cyannie29/" target="_blank" class="social-card">
+                            <div class="frame2">
+                                <img src="images/ig.jpg" alt="Instagram Icon">
+                            </div>
+                            <div class="social-title">INSTAGRAM</div>
+                            <div class="social-handle">Cyan (@Cyannie29)</div>
+                        </a>
+
+                        <a href="mailto:dexieannecytheria.montebon@g.msuiit.edu.ph" class="social-card">
+                            <div class="frame2">
+                                <img src="images/gmail.jpg" alt="Gmail Icon">
+                            </div>
+                            <div class="social-title">GMAIL</div>
+                            <div class="social-handle">dexieannecytheria.montebon@g.msuiit.edu.ph</div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 DACJM. Made with HTML and CSS. All rights reserved.</p>
+        </footer>
+
+        <script>
+            
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "280px";
+                document.getElementById("navOverlay").classList.add("active");
+            }
+
+            
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("navOverlay").classList.remove("active");
+            }
+
+            
+            document.addEventListener('keydown', function(event) {
+                if (event.key === "Escape") {
+                    closeNav();
+                }
+            });
+
+
+        </script>
+    </body>
+</html>
